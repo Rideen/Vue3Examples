@@ -11,7 +11,7 @@ export default {
     /* counter() {
       return this.$store.getters.finalCounter;
     }, */
-    ...mapGetters(['finalCounter']) // object full of computed properties
+    ...mapGetters('numbersModule', ['finalCounter']) // object full of computed properties
   },
 };
 </script>
