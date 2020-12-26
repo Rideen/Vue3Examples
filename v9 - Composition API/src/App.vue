@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, computed, watch } from 'vue';
+import { ref, reactive, toRefs, computed, watch, provide } from 'vue';
 
 import UserData from './components/UserData.vue';
 
@@ -85,6 +85,10 @@ export default {
       // lastName.value = this.$refs.lastNameInput.value;
       lastName.value = lastNameInput.value.value;
     }
+
+    // provide
+
+    provide('userAge', uAge);
 
     return {
       user: user,

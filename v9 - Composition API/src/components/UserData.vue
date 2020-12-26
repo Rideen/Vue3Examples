@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 
 export default {
   props: ['userName', 'age'],
@@ -17,6 +17,13 @@ export default {
     const computedNameAndAge = computed(() => {
       return props.userName + ' ' + props.age;
     });
+
+    // inject
+    // not recommended to change, use as read only and change in the provider class
+    const injectedAge = inject('userAge');
+    console.log(injectedAge);
+
+    console.log(context);
 
     // this.$emit() > context.emits > context.emit('save-data)
 
