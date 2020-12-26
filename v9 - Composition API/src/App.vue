@@ -8,7 +8,8 @@
       <input type="text" placeholder="First Name" @input="setFirstName" />
       <input type="text" placeholder="Last Name" @input="setLastName" />
       <input type="text" placeholder="First Name" v-model="firstName" />
-      <input type="text" placeholder="Last Name" v-model="lastName" />
+      <input type="text" placeholder="Last Name" ref="lastNameInput" />
+      <button @clisk="setLastName2">Set Last Bame</button>
     </div>
   </section>
 </template>
@@ -67,10 +68,19 @@ export default {
     // watch
 
     const watchedAge = watch([uAge, uName], (newValues, oldValues) => {
-    //const watchedAge = watch(uAge, (newValue, oldValue) => {
+      //const watchedAge = watch(uAge, (newValue, oldValue) => {
       console.log('Old age ' + oldValues[0]);
       console.log('New age ' + newValues[0]);
     });
+
+    // template $refs
+
+    const lastNameInput = ref(null);
+
+    function setLastName2() {
+      // lastName.value = this.$refs.lastNameInput.value;
+      lastName.value = lastNameInput.value.value;
+    }
 
     return {
       user: user,
@@ -81,6 +91,8 @@ export default {
       firstName,
       lastName,
       watchedAge,
+      lastNameInput,
+      setLastName2
     };
   },
 };
