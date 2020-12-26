@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, computed } from 'vue';
+import { ref, reactive, toRefs, computed, watch } from 'vue';
 
 // ref is used for values (string, number, etc.), reactive for objects ONLY
 // ref is accessed by ref.value
@@ -24,6 +24,7 @@ export default {
     // ref and reactive - data() { return {}}
 
     const uName = ref('Rideen');
+    const uAge = ref(29);
     const user = reactive({
       name: 'Rideen',
       age: 29,
@@ -63,14 +64,23 @@ export default {
 
     // computedName.value = 'Rade N'; // COMPUTED IS READ ONLY!
 
+    // watch
+
+    const watchedAge = watch([uAge, uName], (newValues, oldValues) => {
+    //const watchedAge = watch(uAge, (newValue, oldValue) => {
+      console.log('Old age ' + oldValues[0]);
+      console.log('New age ' + newValues[0]);
+    });
+
     return {
       user: user,
       setAge: setNewAge,
       setFirstName,
       setLastName,
       computedName,
-      firstName, 
-      lastName
+      firstName,
+      lastName,
+      watchedAge,
     };
   },
 };
