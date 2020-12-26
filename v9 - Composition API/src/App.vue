@@ -3,26 +3,31 @@
     <h2>{{ user.name }}</h2>
     <h3>{{ user.age }}</h3>
     <button @click="setAge">Change Age</button>
+    <h2>{{ computedName }}</h2>
+    <div>
+      <input type="text" placeholder="First Name" @input="setFirstName" />
+      <input type="text" placeholder="Last Name" @input="setLastName" />
+      <input type="text" placeholder="First Name" v-model="firstName" />
+      <input type="text" placeholder="Last Name" v-model="lastName" />
+    </div>
   </section>
 </template>
 
 <script>
-import { ref, reactive, toRefs } from 'vue';
+import { ref, reactive, toRefs, computed } from 'vue';
 
 // ref is used for values (string, number, etc.), reactive for objects ONLY
 // ref is accessed by ref.value
 
 export default {
   setup() {
+    // ref and reactive - data() { return {}}
+
     const uName = ref('Rideen');
     const user = reactive({
       name: 'Rideen',
       age: 29,
     });
-
-    function setNewAge() {
-      user.age = 25;
-    }
 
     setTimeout(() => {
       uName.value = 'R';
@@ -33,18 +38,41 @@ export default {
 
     console.log(userRefs);
 
-    return { user: user, setAge: setNewAge };
-  },
-  // data() {
-  //   return {
-  //     userName: 'Rideen',
-  //   };
-  // },
-  // methods: {
-  //   setAge() {
+    const firstName = ref('');
+    const lastName = ref('');
 
-  //   }
-  // }
+    // functions - methods: {}
+
+    function setNewAge() {
+      user.age = 25;
+    }
+
+    function setFirstName(event) {
+      firstName.value = event.target.value;
+    }
+
+    function setLastName(event) {
+      lastName.value = event.target.value;
+    }
+
+    // computed() - computed: {}
+
+    const computedName = computed(() => {
+      return firstName.value + ' ' + lastName.value;
+    });
+
+    // computedName.value = 'Rade N'; // COMPUTED IS READ ONLY!
+
+    return {
+      user: user,
+      setAge: setNewAge,
+      setFirstName,
+      setLastName,
+      computedName,
+      firstName, 
+      lastName
+    };
+  },
 };
 </script>
 
