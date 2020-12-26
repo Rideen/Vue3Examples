@@ -7,7 +7,14 @@
 </template>
 
 <script>
-import { computed, inject } from 'vue';
+import {
+  computed,
+  inject,
+  onBeforeMount,
+  onMounted,
+  onUnmounted,
+  onUpdated,
+} from 'vue';
 
 export default {
   props: ['userName', 'age'],
@@ -29,7 +36,26 @@ export default {
 
     // slots > context.slots
 
-    return { computedNameAndAge };
+    // lifecycle hooks
+    onBeforeMount(() => {
+      console.log('before mount');
+    });
+
+    onMounted(() => {
+      console.log('on mounted');
+    });
+
+    onUpdated(() => {
+      console.log('on updated');
+    });
+
+    onUnmounted(() => {
+      console.log('on unmounted');
+    });
+
+    return {
+      computedNameAndAge
+    };
   },
 };
 </script>
