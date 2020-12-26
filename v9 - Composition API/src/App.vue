@@ -1,7 +1,6 @@
 <template>
   <section class="container">
-    <h2>{{ user.name }}</h2>
-    <h3>{{ user.age }}</h3>
+    <user-data :user-name="user.name" :age="user.age"></user-data>
     <button @click="setAge">Change Age</button>
     <h2>{{ computedName }}</h2>
     <div>
@@ -17,10 +16,15 @@
 <script>
 import { ref, reactive, toRefs, computed, watch } from 'vue';
 
+import UserData from './components/UserData.vue';
+
 // ref is used for values (string, number, etc.), reactive for objects ONLY
 // ref is accessed by ref.value
 
 export default {
+  components: {
+    UserData
+  },
   setup() {
     // ref and reactive - data() { return {}}
 
