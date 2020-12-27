@@ -48,11 +48,11 @@ export default {
     } = useSearch(projects, 'title');
 
     const hasProjects = computed(() => {
-      return props.user.projects && availableProjects.value.length > 0;
+      return user.value.projects && availableProjects.value.length > 0;
     });
 
     watch(user, function () {
-      enteredSearchTerm.value = '';
+      updateSearch('');
     });
 
     return {
